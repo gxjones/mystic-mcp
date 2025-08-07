@@ -26,9 +26,9 @@ pip install mystic-mcp
 ## Quick Start
 
 ```python
-from mystic_mcp import MysticServer
+from mystic_mcp import MysticMCP
 
-server = MysticServer("my-awesome-server", "1.0.0")
+server = MysticMCP("my-awesome-server", "1.0.0")
 
 @server.tool("calculate")
 async def calculate(expression: str) -> str:
@@ -87,7 +87,7 @@ async def search_documents(
 ### Server Configuration
 
 ```python
-server = MysticServer(
+server = MysticMCP(
     name="my-server",
     version="1.0.0",
     description="An awesome MCP server",
@@ -118,6 +118,42 @@ pytest
 # Run with hot reload
 mystic-mcp dev your_server.py
 ```
+
+### Code Quality
+
+This project uses modern Python tooling for code quality and consistency:
+
+```bash
+# Format code (auto-fixes style issues)
+ruff format .
+
+# Lint and auto-fix common issues
+ruff check --fix .
+
+# Type checking
+mypy mystic_mcp/
+
+# Run all quality checks
+ruff check . && ruff format --check . && mypy mystic_mcp/
+```
+
+**Tools used:**
+- **Ruff**: Fast linting and formatting (replaces Black, Flake8, isort)
+- **mypy**: Static type checking
+- Configuration in `pyproject.toml`
+
+**IDE Setup:**
+- Install the Ruff extension for your editor (VS Code, PyCharm, etc.)
+- Enable format-on-save for automatic code formatting
+- Most editors will show linting errors inline
+
+**Pre-commit hooks** (optional but recommended):
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+This ensures code is automatically formatted and linted before each commit.
 
 ## Project Structure
 
