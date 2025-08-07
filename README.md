@@ -1,4 +1,5 @@
 # Mystic MCP
+
 <img src="docs/assets/AD85F741-E621-4DE7-876B-F6984A68E35A.png" alt="mysticmcp" width="50%">
 
 A high-level Python framework for building Model Context Protocol (MCP) servers without the complexity.
