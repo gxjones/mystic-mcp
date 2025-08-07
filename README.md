@@ -30,13 +30,13 @@ from mystic_mcp import MysticMCP
 
 server = MysticMCP("my-awesome-server", "1.0.0")
 
-@server.tool("calculate")
+@server.tool()
 async def calculate(expression: str) -> str:
     """Evaluate mathematical expressions safely."""
     # Your calculation logic here
     return str(eval(expression))  # Don't actually use eval() in production!
 
-@server.resource("weather/{city}")
+@server.tool()
 async def get_weather(city: str) -> dict:
     """Get weather data for a city."""
     # Your weather API integration here
@@ -58,23 +58,14 @@ if __name__ == "__main__":
 
 ## Advanced Usage
 
-### Custom Resource Handlers
-
-```python
-@server.resource("files/{path}")
-async def read_file(path: str, mime_type: str = "text/plain") -> bytes:
-    """Read files from the filesystem."""
-    with open(path, 'rb') as f:
-        return f.read()
-```
 
 ### Tool with Complex Parameters
 
 ```python
 from typing import List, Optional
 
-@server.tool("search")
-async def search_documents(
+@server.tool()
+async def search(
     query: str,
     filters: Optional[List[str]] = None,
     limit: int = 10
@@ -95,11 +86,6 @@ server = MysticMCP(
     license="MIT"
 )
 
-# Configure logging
-server.configure_logging(level="INFO", format="json")
-
-# Add middleware
-server.add_middleware(cors=True, rate_limiting=True)
 ```
 
 ## Development
@@ -154,38 +140,6 @@ pre-commit install
 ```
 
 This ensures code is automatically formatted and linted before each commit.
-
-## Project Structure
-
-```
-your-mcp-server/
-├── server.py              # Your main server file
-├── tools/                 # Tool implementations
-│   ├── __init__.py
-│   ├── calculator.py
-│   └── weather.py
-├── resources/             # Resource handlers
-│   ├── __init__.py
-│   └── files.py
-├── requirements.txt       # Dependencies
-└── README.md             # Your server documentation
-```
-
-## Best Practices
-
-- **One responsibility per tool/resource**: Keep functions focused and single-purpose
-- **Use type hints**: Enable better IDE support and runtime validation
-- **Handle errors gracefully**: Use try/catch blocks and return meaningful error messages
-- **Document your tools**: Write clear docstrings for auto-generated help
-- **Test thoroughly**: Write unit tests for your tools and resources
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
