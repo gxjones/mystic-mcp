@@ -3,13 +3,12 @@ Core functionality for Mystic MCP.
 """
 
 import asyncio
-import inspect
+from inspect import iscoroutinefunction
 from pprint import pprint
 from typing import Callable
-from inspect import iscoroutinefunction
 
-from mystic_mcp.types import Tool
 from mystic_mcp.ast_utils import extract_function_schemas
+from mystic_mcp.types import Tool
 
 
 class MysticMCP:
@@ -26,7 +25,7 @@ class MysticMCP:
         def decorator(func: Callable):
             description = func.__doc__
             tool_name = name if name is not None else func.__name__
-            
+
             # Extract schemas using Pydantic
             schemas = extract_function_schemas(func)
 

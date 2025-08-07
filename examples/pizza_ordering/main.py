@@ -4,8 +4,9 @@ A Pizza MCP Server
 Minimal example using the mystic-mcp framework
 """
 
-from mystic_mcp import MysticMCP
 from typing import Literal
+
+from mystic_mcp import MysticMCP
 
 app = MysticMCP()
 
